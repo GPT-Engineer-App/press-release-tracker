@@ -63,7 +63,9 @@ const Index = () => {
             pressReleases={filteredPressReleases} 
             onPressReleaseClick={(pr) => {
               setSelectedPressRelease(pr);
-              setIsAddDocumentModalOpen(true);
+              if (pr) {
+                setIsAddDocumentModalOpen(true);
+              }
             }}
           />
         </CardContent>

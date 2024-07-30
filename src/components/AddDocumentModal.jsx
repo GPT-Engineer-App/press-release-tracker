@@ -10,16 +10,20 @@ const AddDocumentModal = ({ isOpen, onClose, onAddDocument, pressRelease }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddDocument(pressRelease.id, { name: documentName, url: documentUrl });
-    setDocumentName('');
-    setDocumentUrl('');
+    if (pressRelease) {
+      onAddDocument(pressRelease.id, { name: documentName, url: documentUrl });
+      setDocumentName('');
+      setDocumentUrl('');
+    }
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add Document to "{pressRelease.title}"</DialogTitle>
+          <DialogTitle>
+            {pressRelease ? `Add Document to "${pressRelease.title}"` : 'Add Document'}
+          </DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4 py-4">
