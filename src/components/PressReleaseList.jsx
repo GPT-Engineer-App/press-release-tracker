@@ -1,7 +1,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 
-const PressReleaseList = ({ pressReleases }) => {
+const PressReleaseList = ({ pressReleases, onPressReleaseClick }) => {
   const getStatusColor = (status) => {
     switch (status) {
       case 'Draft':
@@ -26,12 +26,13 @@ const PressReleaseList = ({ pressReleases }) => {
       </TableHeader>
       <TableBody>
         {pressReleases.map((pr) => (
-          <TableRow key={pr.id}>
+          <TableRow key={pr.id} className="cursor-pointer hover:bg-gray-100" onClick={() => onPressReleaseClick(pr)}>
             <TableCell className="font-medium">{pr.title}</TableCell>
             <TableCell>{pr.date}</TableCell>
             <TableCell>
               <Badge className={getStatusColor(pr.status)}>{pr.status}</Badge>
             </TableCell>
+            <TableCell>{pr.documents ? pr.documents.length : 0} documents</TableCell>
           </TableRow>
         ))}
       </TableBody>
